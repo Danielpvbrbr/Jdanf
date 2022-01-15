@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "pvshopee",
-    "slug": "pvshopee",
+    "name": "JDanf",
+    "slug": "JDanf",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FF8000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -27,6 +27,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": ""
   }
 }
