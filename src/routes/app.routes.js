@@ -7,8 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 
 import Home from '../pages/Home';
-import Category from '../pages/Category';
-import Promotions from '../pages/Promotions';
+import Favorites from '../pages/Favorites';
 import Notifications from '../pages/Notifications';
 import Account from '../pages/Account';
 
@@ -16,41 +15,21 @@ import HeaderPerson from '../components/HeaderPerson';
 import HeaderSearch from '../components/HeaderSearch';
 import HeaderProfile from '../components/HeaderProfile';
 import HeaderSubPage from '../components/HeaderSubPage';
+import ButtonNew from '../components/ButtonNew';
 
 import Purchase from '../subpage/Purchase';
-import About from '../subpage/About';
-import Evaluation from '../subpage/Evaluation';
-import Favorites from '../subpage/Favorites';
+import MyStore from '../subpage/MyStore';
 import Help from '../subpage/Help';
-import Indications from '../subpage/Indications';
 import Settings from '../subpage/Settings';
-import Cart from '../subpage/Cart';
 import Profile from '../subpage/Profile';
+
 import ViewProduct from '../subpage/ViewProduct';
+import Announce from '../subpage/Announce';
+import AreaChat from '../subpage/AreaChat';
+import Chat from '../subpage/Chat';
 
 const Tab = createBottomTabNavigator();
 const AuthStack = createNativeStackNavigator();
-
-const icons = {
-    Inicio: {
-        name: 'home'
-    },
-    stack: {
-        name: 'home'
-    },
-    Categoria: {
-        name: 'grid-outline'
-    },
-    Promoções: {
-        name: 'flame-outline'
-    },
-    Notificações: {
-        name: 'notifications-outline'
-    },
-    Conta: {
-        name: 'person-outline'
-    }
-};
 
 export default function AppRoutes() {
     return (
@@ -58,7 +37,7 @@ export default function AppRoutes() {
             <AuthStack.Screen name="Tabs" component={Tabs} options={{
                 headerShown: false,
             }} />
-              <AuthStack.Screen
+            <AuthStack.Screen
                 name="Profile"
                 component={Profile}
                 options={{
@@ -71,19 +50,7 @@ export default function AppRoutes() {
                         <HeaderSubPage />
                     ),
                 }} />
-            <AuthStack.Screen
-                name="Cart"
-                component={Cart}
-                options={{
-                    headerTitle: 'Carinho de Compras',
-                    headerStyle: {
-                        backgroundColor: '#FF8000',
-                    },
-                    headerTintColor: '#fff',
-                    headerRight: () => (
-                        <HeaderSubPage />
-                    ),
-                }} />
+
             <AuthStack.Screen
                 name="Purchase"
                 component={Purchase}
@@ -99,10 +66,10 @@ export default function AppRoutes() {
                 }} />
 
             <AuthStack.Screen
-                name="About"
-                component={About}
+                name="MyStore"
+                component={MyStore}
                 options={{
-                    headerTitle: 'Sobre',
+                    headerTitle: 'Meus Anúncios',
                     headerStyle: {
                         backgroundColor: '#FF8000',
                     },
@@ -111,19 +78,7 @@ export default function AppRoutes() {
                         <HeaderSubPage />
                     ),
                 }} />
-            <AuthStack.Screen
-                name="Evaluation"
-                component={Evaluation}
-                options={{
-                    headerTitle: 'Minhas Avaliação',
-                    headerStyle: {
-                        backgroundColor: '#FF8000',
-                    },
-                    headerTintColor: '#fff',
-                    headerRight: () => (
-                        <HeaderSubPage />
-                    ),
-                }} />
+
             <AuthStack.Screen name="Favorites" component={Favorites} options={{
                 headerTitle: 'Favoritos',
                 headerStyle: {
@@ -134,6 +89,7 @@ export default function AppRoutes() {
                     <HeaderSubPage />
                 ),
             }} />
+
             <AuthStack.Screen name="Help" component={Help} options={{
                 headerTitle: 'Central de Ajuda',
                 headerStyle: {
@@ -144,17 +100,7 @@ export default function AppRoutes() {
                     <HeaderSubPage />
                 ),
             }} />
-            <AuthStack.Screen name="Indications" component={Indications} options={{
-                headerTitle: 'Indicar um Amigo',
-                headerStyle: {
-                    backgroundColor: '#FF8000',
-                },
-                headerTintColor: '#fff',
-                headerRight: () => (
-                    <HeaderSubPage />
-                ),
-            }} />
-    
+
             <AuthStack.Screen
                 name="Settings"
                 component={Settings}
@@ -166,13 +112,13 @@ export default function AppRoutes() {
                     headerRight: () => (
                         <HeaderSubPage />
                     ),
-
                 }} />
 
             <AuthStack.Screen
                 name="ViewProduct"
                 component={ViewProduct}
                 options={{
+                    headerTitle: 'Anúncio',
                     headerStyle: {
                         backgroundColor: '#FF8000',
                     },
@@ -180,6 +126,29 @@ export default function AppRoutes() {
                     headerRight: () => (
                         <HeaderSubPage />
                     ),
+                }} />
+
+            <AuthStack.Screen
+                name="Chat"
+                component={Chat}
+                options={{
+                    headerTitle: 'Negociações',
+                    headerStyle: {
+                        backgroundColor: '#FF8000',
+                    },
+                    headerTintColor: '#fff',
+
+                }} />
+
+            <AuthStack.Screen
+                name="AreaChat"
+                component={AreaChat}
+                options={{
+                    headerTitle: 'Negociações',
+                    headerStyle: {
+                        backgroundColor: '#FF8000',
+                    },
+                    headerTintColor: '#fff',
 
                 }} />
         </AuthStack.Navigator>
@@ -190,15 +159,16 @@ function Tabs() {
     return (
 
         <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ color, size }) => {
-                    const { name } = icons[route.name]
-                    return <Ionicons name={name} color={color} size={size} />
-                },
+            screenOptions={() => ({
                 tabBarStyle: {
-                    backgroundColor: '#FF8000'
+                    backgroundColor: '#FF8000',
+                    paddingTop: 5,
+                    paddingBottom: 5
                 },
-                tabBarActiveTintColor: '#fff'
+                tabBarActiveTintColor: '#18346D',
+                tabBarInactiveTintColor: '#FFF',
+                tabBarHideOnKeyboard: true
+
             })}
         >
             <Tab.Screen
@@ -213,11 +183,14 @@ function Tabs() {
                     headerRight: () => (
                         <HeaderSearch />
                     ),
+                    tabBarIcon: ({ size, color }) => (
+                        <Ionicons name="home" size={size} color={color} />
+                    ),
                 }}
             />
             <Tab.Screen
-                name="Categoria"
-                component={Category}
+                name="Favorites"
+                component={Favorites}
                 options={{
                     headerStyle: {
                         backgroundColor: '#FF8000',
@@ -226,15 +199,18 @@ function Tabs() {
                     headerRight: () => (
                         <HeaderPerson />
                     ),
-
+                    tabBarIcon: ({ size, color }) => (
+                        <Ionicons name="heart" size={size} color={color} />
+                    ),
 
                 }}
             />
-
             <Tab.Screen
-                name="Promoções"
-                component={Promotions}
+                name="Announce"
+                component={Announce}
                 options={{
+                    tabBarLabel: '',
+                    tabBarActiveTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: '#FF8000',
                     },
@@ -242,9 +218,12 @@ function Tabs() {
                     headerRight: () => (
                         <HeaderPerson />
                     ),
+                    tabBarIcon: ({ size, color, focused }) => (
+                        <ButtonNew size={size} color={color} focused={focused} />
+                    ),
+
                 }}
             />
-
             <Tab.Screen
                 name="Notificações"
                 component={Notifications}
@@ -256,7 +235,10 @@ function Tabs() {
                     headerRight: () => (
                         <HeaderPerson />
                     ),
-                    tabBarBadge: 3
+                    tabBarIcon: ({ size, color }) => (
+                        <Ionicons name="notifications" size={size} color={color} />
+                    ),
+                    tabBarBadge: 3,
                 }}
             />
             <Tab.Screen
@@ -270,6 +252,9 @@ function Tabs() {
                     headerTintColor: '#fff',
                     headerRight: () => (
                         <HeaderProfile />
+                    ),
+                    tabBarIcon: ({ size, color }) => (
+                        <Ionicons name="person" size={size} color={color} />
                     ),
                 }}
             />

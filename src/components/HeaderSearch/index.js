@@ -22,9 +22,10 @@ export default function HeaderSearch() {
 
             />
             <TouchableOpacity style={styles.cart}>
-                <Ionicons name="cart-outline" size={24} color="#fff" onPress={() => navigation.navigate('Cart')} />
+                <Ionicons name="filter" size={24} color="#fff" onPress={()=>alert('filter')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.chat}>
+
+            <TouchableOpacity style={styles.chat} onPress={() => navigation.navigate('Chat')}>
                 <Ionicons name="chatbubbles-outline" size={24} color="#fff" />
             </TouchableOpacity>
 

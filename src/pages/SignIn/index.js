@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
   TextInput,
@@ -9,13 +9,14 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../../contexts/auth';
+import styles from './styles';
 
-export default function SignIn() {
-  const navigation = useNavigation();
-  const [user, setUser] = useState(null);
-  const [pass, setPass] = useState(null);
+export default function SignIn({ navigation }) {
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
   const [showPass, setShowPass] = useState(false);
+  const { signIn } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -30,8 +31,8 @@ export default function SignIn() {
       <View style={styles.areaLogin}>
         <Ionicons style={styles.IconUser} name="person-outline" size={24} color="black" />
         <TextInput
-          value={user}
-          onChange={text => setUser(text)}
+          value={email}
+          onChangeText={text => setEmail(text)}
           style={styles.inputText}
           placeholder="E-mail/Telefone"
         />
@@ -39,19 +40,19 @@ export default function SignIn() {
 
         <Ionicons style={styles.IconPass} name="md-lock-closed-outline" size={24} color="black" />
         <TextInput
-          value={pass}
-          onChange={text => setPass(text)}
+          value={password}
+          onChangeText={text => setPassword(text)}
           style={styles.inputText}
           secureTextEntry={!showPass}
           placeholder="Senha"
         />
         {showPass ?
-          <Ionicons onPress={()=>setShowPass(!showPass)} style={styles.showPass} name="eye-outline" size={24} color="black" />
+          <Ionicons onPress={() => setShowPass(!showPass)} style={styles.showPass} name="eye-outline" size={24} color="black" />
           :
-          <Ionicons onPress={()=>setShowPass(!showPass)} style={styles.showPass} name="eye-off-outline" size={24} color="black" />
+          <Ionicons onPress={() => setShowPass(!showPass)} style={styles.showPass} name="eye-off-outline" size={24} color="black" />
         }
 
-        <TouchableOpacity style={styles.buttonEntrar}>
+        <TouchableOpacity style={styles.buttonEntrar} onPressIn={() => signIn(email, password)}>
           <Text style={styles.textButton}>Entrar</Text>
         </TouchableOpacity>
 
@@ -65,7 +66,7 @@ export default function SignIn() {
           </TouchableOpacity>
         </View>
 
-        <Text style={{marginTop: 10, color:'#848484'}}>________________________OU________________________</Text>
+        <Text style={{ marginTop: 10, color: '#848484' }}>________________________OU________________________</Text>
 
         <TouchableOpacity style={styles.buttonEntrar}>
           <Image
@@ -89,72 +90,3 @@ export default function SignIn() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logo: {
-    width: 115,
-    height: 115,
-    marginTop: -15,
-    marginBottom: 10
-  },
-  IconUser: {
-    position: 'absolute',
-    top: 30,
-    left: 8
-  },
-  IconPass: {
-    position: 'absolute',
-    top: 102,
-    left: 8
-  },
-  showPass: {
-    position: 'absolute',
-    left: 265,
-    top: 103
-  },
-  inputText: {
-    width: 300,
-    height: 50,
-    marginTop: 20,
-    borderWidth: 1,
-    paddingLeft: 40
-  },
-  buttonEntrar: {
-    width: 300,
-    height: 50,
-    backgroundColor: '#18346D',
-    marginTop: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    marginRight: 10,
-    borderRadius: 5
-  },
-  areaReg: {
-    marginTop: 6,
-    marginRight: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  textButton: {
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-  logoGoogle: {
-    position: 'absolute',
-    right: 265,
-    width: 24,
-    height: 24,
-  },
-  logoFacebook: {
-    position: 'absolute',
-    right: 265,
-    width: 26,
-    height: 26,
-  },
-});

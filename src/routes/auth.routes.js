@@ -6,14 +6,20 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 
 import Home from '../pages/Home';
-import Category from '../pages/Category';
-import Promotions from '../pages/Promotions';
-
+import Favorites from '../pages/Favorites';
+import Notifications from '../pages/Notifications';
 import Account from '../pages/Account';
 
 import HeaderPerson from '../components/HeaderPerson';
 import HeaderSearch from '../components/HeaderSearch';
 import HeaderProfile from '../components/HeaderProfile';
+import HeaderSubPage from '../components/HeaderSubPage';
+
+import ViewProduct from '../subpage/ViewProduct';
+import Announce from '../subpage/Announce';
+import Chat from '../subpage/Chat';
+import AreaChat from '../subpage/AreaChat';
+
 
 const AuthStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,11 +29,8 @@ const icons = {
     Inicio: {
         name: 'home'
     },
-    Categoria: {
-        name: 'grid-outline'
-    },
-    Promoções: {
-        name: 'flame-outline'
+    Favoritos: {
+        name: 'heart'
     },
     Notificações: {
         name: 'notifications-outline'
@@ -48,7 +51,10 @@ function Tabs() {
                 tabBarStyle: {
                     backgroundColor: '#FF8000'
                 },
-                tabBarActiveTintColor: '#FFF'
+                tabBarActiveTintColor: '#18346D',
+                tabBarInactiveTintColor: '#FFF',
+                tabBarHideOnKeyboard: true
+
             })}
         >
             <Tab.Screen
@@ -66,8 +72,8 @@ function Tabs() {
                 }}
             />
             <Tab.Screen
-                name="Categoria"
-                component={Category}
+                name="Favoritos"
+                component={Favorites}
                 options={{
                     headerStyle: {
                         backgroundColor: '#FF8000',
@@ -79,8 +85,8 @@ function Tabs() {
                 }}
             />
             <Tab.Screen
-                name="Promoções"
-                component={Promotions}
+                name="Notificações"
+                component={Notifications}
                 options={{
                     headerStyle: {
                         backgroundColor: '#FF8000',
@@ -113,22 +119,31 @@ function Tabs() {
 export default function AuthRoutes() {
     return (
         <AuthStack.Navigator>
-            <AuthStack.Screen name="Tabs" component={Tabs} options={{
-                headerShown: false,
-            }} />
-            <AuthStack.Screen name="SignUp" component={SignUp} options={{
+            <AuthStack.Screen
+                name="Tabs"
+                component={Tabs} options={{
+                    headerShown: false,
+                }} />
+            <AuthStack.Screen
+                name="SignUp"
+                component={SignUp}
+                options={{
 
-                headerShown: true,
-                headerTitle: 'Cadastrar',
-            }} />
-            <AuthStack.Screen name="SignIn" component={SignIn} options={{
-                headerShown: true,
-                headerTitle: 'Entrar',
-            }} />
-             <AuthStack.Screen
+                    headerShown: true,
+                    headerTitle: 'Cadastrar',
+                }} />
+            <AuthStack.Screen
+                name="SignIn"
+                component={SignIn}
+                options={{
+                    headerShown: true,
+                    headerTitle: 'Entrar',
+                }} />
+            <AuthStack.Screen
                 name="ViewProduct"
                 component={ViewProduct}
                 options={{
+                    headerTitle: 'Anúncio',
                     headerStyle: {
                         backgroundColor: '#FF8000',
                     },
@@ -136,6 +151,42 @@ export default function AuthRoutes() {
                     headerRight: () => (
                         <HeaderSubPage />
                     ),
+
+                }} />
+
+            <AuthStack.Screen
+                name="Announce"
+                component={Announce}
+                options={{
+                    headerTitle: 'Anúnciar produto',
+                    headerStyle: {
+                        backgroundColor: '#FF8000',
+                    },
+                    headerTintColor: '#fff',
+
+                }} />
+
+            <AuthStack.Screen
+                name="Chat"
+                component={Chat}
+                options={{
+                    headerTitle: 'Negociações',
+                    headerStyle: {
+                        backgroundColor: '#FF8000',
+                    },
+                    headerTintColor: '#fff',
+
+                }} />
+
+            <AuthStack.Screen
+                name="AreaChat"
+                component={AreaChat}
+                options={{
+                    headerTitle: 'Negociações',
+                    headerStyle: {
+                        backgroundColor: '#FF8000',
+                    },
+                    headerTintColor: '#fff',
 
                 }} />
         </AuthStack.Navigator>

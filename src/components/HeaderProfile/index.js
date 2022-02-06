@@ -24,9 +24,9 @@ export default function HeaderProfile() {
             {
                 signed ?
                     <>
-                        <TouchableOpacity style={styles.cart} onPress={() => navigation.navigate('Cart')}>
+                        {/* <TouchableOpacity style={styles.cart} onPress={() => navigation.navigate('Cart')}>
                             <Ionicons name="cart-outline" size={24} color="#fff" />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
                         <TouchableOpacity style={styles.chat} >
                             <Ionicons name="chatbubbles-outline" size={24} color="#fff" />

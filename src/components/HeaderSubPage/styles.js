@@ -5,13 +5,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    ar1:{
-       
-    },
     cart: {
         marginLeft: 2,
         marginRight: 10
-        
     },
     chat: {
         marginRight: 0

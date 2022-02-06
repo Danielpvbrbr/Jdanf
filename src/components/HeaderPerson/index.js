@@ -8,10 +8,10 @@ export default function HeaderPerson() {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.cart}>
+            {/* <TouchableOpacity style={styles.cart}>
                 <Ionicons name="cart-outline" size={24} color="#fff" onPress={()=> navigation.navigate('Cart')}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.chat} onPress={()=> navigation.navigate('Cart')}>
+            </TouchableOpacity> */}
+            <TouchableOpacity style={styles.chat} onPress={() => navigation.navigate('Chat')}>
                 <Ionicons name="chatbubbles-outline" size={24} color="#fff" />
             </TouchableOpacity>
         </View>
